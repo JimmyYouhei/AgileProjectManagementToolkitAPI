@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <Folder Include="Dto\NewFolder\" />
+    <Folder Include="Interfaces\UnitOfWork\" />
+    <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
 

@@ -33,7 +33,9 @@ namespace AgileProjectManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("corsPolicy" , builder => {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
             services.AddDbContext<ProjectDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
             services.AddControllers();
             services.AddTransient<IRepository<Project>, ProjectRepository>();
@@ -41,11 +43,13 @@ namespace AgileProjectManagement
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectRepository, ProjectRepository>();
             //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("corsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,6 +63,7 @@ namespace AgileProjectManagement
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

@@ -45,7 +45,7 @@ namespace AgileProjectManagement.Controllers
             {
                 ProjectDescription = projectDto.ProjectDescription,
                 ProjectName = projectDto.ProjectName,
-                ProjectVersion = projectDto.ProjectName
+                ProjectVersion = projectDto.ProjectVersion
             };
 
             return projectService.CreateElement(projectToCreate);
@@ -60,7 +60,7 @@ namespace AgileProjectManagement.Controllers
                 Id = id,
                 ProjectDescription = projectDto.ProjectDescription,
                 ProjectName = projectDto.ProjectName,
-                ProjectVersion = projectDto.ProjectName
+                ProjectVersion = projectDto.ProjectVersion
             };
 
             return projectService.UpdateElement(projectToUpdate);
